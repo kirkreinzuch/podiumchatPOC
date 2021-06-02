@@ -3,18 +3,18 @@
 <img src="https://www.podium.com/wp-content/uploads/2019/04/pdmlogo_white.png"><br>
 Podium Chat POC Test
 
+
 <style type='text/css'>
 	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #005290;
-		font-family: "Arial", sans-serif;
+		background-color: #E73E51;
+		font-family: "Graphik", sans-serif;
 	}
 	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #005290;
+		outline: 1px solid #E73E51;
 	}
 </style>
 
 <input type="hidden" name= "liveagent.prechat.findorcreate.saveToTranscript: String entityName" value= "String transcriptFieldName" />
-
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
@@ -39,12 +39,6 @@ Podium Chat POC Test
 
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-		embedded_svc.settings.extraPrechatFormDetails = [
-			    {
-				"label":"Email",  
-				"transcriptFields": ["Email__c"]
-			    }
-			];
 
 		embedded_svc.init(
 			'https://podium--fullercopy.my.salesforce.com',
@@ -74,5 +68,18 @@ Podium Chat POC Test
 		initESW('https://service.force.com');
 	}
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
