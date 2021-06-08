@@ -25,7 +25,6 @@ body  {
 </style>
 
 <input type="hidden" name= "liveagent.prechat.findorcreate.saveToTranscript: String entityName" value= "String transcriptFieldName" />
-
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
 	var initESW = function(gslbBaseURL) {
@@ -58,17 +57,18 @@ body  {
 				    "transcriptFields": ["Product__c"]
 			    }
 			];
+		
 		embedded_svc.init(
-			'https://podium--fullercopy.my.salesforce.com',
-			'https://fullercopy-podiumcompany.cs34.force.com/internal',
+			'https://podium--fullcopy.my.salesforce.com',
+			'https://fullcopy-podiumcompany.cs196.force.com/internal',
 			gslbBaseURL,
-			'00D2f0000000qYq',
+			'00D030000004bHC',
 			'Product_Support_Chat_Team',
 			{
-				baseLiveAgentContentURL: 'https://c.la3-c1cs-ph2.salesforceliveagent.com/content',
-				deploymentId: '5722f0000004D0w',
-				buttonId: '5732f0000004EZw',
-				baseLiveAgentURL: 'https://d.la3-c1cs-ph2.salesforceliveagent.com/chat',
+				baseLiveAgentContentURL: 'https://c.la2-c1cs-ia4.salesforceliveagent.com/content',
+				deploymentId: '57203000000GmcZ',
+				buttonId: '57303000000GmnN',
+				baseLiveAgentURL: 'https://d.la2-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'Product_Support_Chat_Team',
 				isOfflineSupportEnabled: false
 			}
@@ -77,7 +77,7 @@ body  {
 
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
-		s.setAttribute('src', 'https://podium--fullercopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.setAttribute('src', 'https://podium--fullcopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
 			initESW(null);
 		};
@@ -86,18 +86,6 @@ body  {
 		initESW('https://service.force.com');
 	}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
