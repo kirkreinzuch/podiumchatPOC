@@ -60,15 +60,15 @@ body  {
 			];
 		
 		embedded_svc.init(
-			'https://podium--fullcopy.my.salesforce.com',
-			'https://fullcopy-podiumcompany.cs196.force.com/internal',
+			'https://podium--fullercopy.my.salesforce.com',
+			'https://fullercopy-podiumcompany.cs196.force.com/internal',
 			gslbBaseURL,
-			'00D030000004bHC',
+			'00D050000004bNV',
 			'Product_Support_Chat_Team',
 			{
 				baseLiveAgentContentURL: 'https://c.la2-c1cs-ia4.salesforceliveagent.com/content',
-				deploymentId: '57203000000GmcZ',
-				buttonId: '57303000000GmnN',
+				deploymentId: '57205000000CaVO',
+				buttonId: '57305000000Cacf',
 				baseLiveAgentURL: 'https://d.la2-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'Product_Support_Chat_Team',
 				isOfflineSupportEnabled: true
@@ -78,7 +78,7 @@ body  {
 
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
-		s.setAttribute('src', 'https://podium--fullcopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.setAttribute('src', 'https://podium--fullercopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
 			initESW(null);
 		};
