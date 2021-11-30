@@ -92,15 +92,15 @@ body  {
 			'https://podium--fullercopy.my.salesforce.com',
 			'https://fullercopy-podiumcompany.cs198.force.com/internal',
 			gslbBaseURL,
-			'00D050000004bNV',
+			'00D3I0000008aeo',
 			'Product_Support_Chat_Team',
 			{
-				baseLiveAgentContentURL: 'https://c.la2-c1cs-ia4.salesforceliveagent.com/content',
-				deploymentId: '57205000000CaVO',
-				buttonId: '57305000000Cacf',
-				baseLiveAgentURL: 'https://d.la2-c1cs-ia4.salesforceliveagent.com/chat',
+				baseLiveAgentContentURL: 'https://c.la1-c1cs-ia4.salesforceliveagent.com/content',
+				deploymentId: '5723I0000008ON0',
+				buttonId: '5733I0000008OUy',
+				baseLiveAgentURL: 'https://d.la1-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'Product_Support_Chat_Team',
-				isOfflineSupportEnabled: false
+				isOfflineSupportEnabled: true
 			}
 		);
 	};
