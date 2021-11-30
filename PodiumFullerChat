@@ -60,7 +60,7 @@ body  {
 				buttonId: '5733I0000008OUy',
 				baseLiveAgentURL: 'https://d.la1-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'Product_Support_Chat_Team',
-				isOfflineSupportEnabled: true
+				isOfflineSupportEnabled: false
 			}
 		);
 	};
