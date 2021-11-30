@@ -90,7 +90,7 @@ body  {
 
 		embedded_svc.init(
 			'https://podium--fullercopy.my.salesforce.com',
-			'https://fullercopy-podiumcompany.cs198.force.com/internal',
+			'https://fullercopy-podiumcompany.cs123.force.com/internal',
 			gslbBaseURL,
 			'00D3I0000008aeo',
 			'Product_Support_Chat_Team',
