@@ -1,49 +1,24 @@
 <htmL>
-<head>    
-<style>
-body  {
-  background-image: url("https://www.podium.com/wp-content/uploads/2020/09/webthumbnail@2x.png");
-  background-color: #cccccc;
-}
-</style>
-</head>
-<body>
-<h2><span style="background-color: #000000; color: #ffffff;">Podium Chat POC Test</span></h2>
-<p><span style="background-color: #000000; color: #ffffff;">1. In order to have chat available, an agent must be online in Salesforce and assigned to a queue within Omni-Channel Supervisor. Additionally, assigning skills will allow your reps to take Chats for certain customer tiers, and Products.</span></p>
-<p><span style="background-color: #000000; color: #ffffff;">2. Start a chat, enter in contact details (use one that already exists in SF with a tier) for it to route correctly. An agent in SF should have that skill and available to accept the chat, or you will see the chat waiting in the Skills Backlog.</span></p>
-<p><span style="background-color: #000000; color: #ffffff;">3. Chat should open, to person with correct skills. Chat should relate to the contact in Salesforce (If no contact is in Salesforce, no contact will be assigned) and a case will be created/related to the Chat.</span></p>
-<p><span style="background-color: #000000; color: #ffffff;">4. Work the chat, close the chat, then close the related case or follow up with them via email.</span></p>
-  
-<style type='text/css'>
-	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #4C76E0;
-		font-family: "Graphik", sans-serif;
-	}
-	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #4C76E0;
-	}
-</style>
+<input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript: String entityName"
+	value="String transcriptFieldName" />
 
-<input type="hidden" name= "liveagent.prechat.findorcreate.saveToTranscript: String entityName" value= "String transcriptFieldName" />
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
+	var initESW = function (gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-
-		embedded_svc.settings.defaultMinimizedText = 'Contact Us'; 
+		embedded_svc.settings.defaultMinimizedText = 'Contact Us';
 		//embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
-
 		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
 		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
 
 		// Settings for Chat
 		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-			// Returns a valid button ID.
+		// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+		// Returns a valid button ID.
 		//};
 		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
-		embedded_svc.settings.prepopulatedPrechatFields = { "FirstName": "Kirk", "LastName": "Reinzuch", "Email": "kirk.reinzuch@veltig.com"}; //Sets the auto-population of pre-chat form fields
+		embedded_svc.settings.prepopulatedPrechatFields = { "FirstName": "Kirk", "LastName": "Reinzuch", "Email": "kirk.reinzuch@veltig.com" }; //Sets the auto-population of pre-chat form fields
 		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
 		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
 
@@ -51,42 +26,42 @@ body  {
 		embedded_svc.settings.entryFeature = 'LiveAgent';
 		embedded_svc.settings.extraPrechatFormDetails = [
 			{
-			    "label":"Email",  
-			    "transcriptFields": ["Email__c"],
-			}, 
-		    {
-		    "label":"Product",
-		    "transcriptFields": ["Product__c"]
+				"label": "Email",
+				"transcriptFields": ["Email__c"],
+			},
+			{
+				"label": "Product",
+				"transcriptFields": ["Product__c"]
 			}
-		    ];
-		
+		];
+
 		embedded_svc.settings.extraPrechatInfo = [{
-                        "entityName": "Contact",
-                        "showOnCreate": true,
-                        "linkToEntityName": "Case",
-                        "linkToEntityField": "ContactId",
-                        "saveToTranscript": "ContactId",
-                        "entityFieldMaps": [{
-                            "isExactMatch": true,
-                            "fieldName": "FirstName",
-                            "doCreate": true,
-                            "doFind": false,
-                            "label": "First Name"
-                        }, {
-                            "isExactMatch": true,
-                            "fieldName": "LastName",
-                            "doCreate": true,
-                            "doFind": false,
-                            "label": "Last Name"
-                        }, {
-                            "isExactMatch": true,
-                            "fieldName": "Email",
-                            "doCreate": true,
-                            "doFind": true,
-                            "label": "Email"
-                        }]
-                    }
-                ];
+			"entityName": "Contact",
+			"showOnCreate": true,
+			"linkToEntityName": "Case",
+			"linkToEntityField": "ContactId",
+			"saveToTranscript": "ContactId",
+			"entityFieldMaps": [{
+				"isExactMatch": true,
+				"fieldName": "FirstName",
+				"doCreate": true,
+				"doFind": false,
+				"label": "First Name"
+			}, {
+				"isExactMatch": true,
+				"fieldName": "LastName",
+				"doCreate": true,
+				"doFind": false,
+				"label": "Last Name"
+			}, {
+				"isExactMatch": true,
+				"fieldName": "Email",
+				"doCreate": true,
+				"doFind": true,
+				"label": "Email"
+			}]
+		}
+		];
 
 		embedded_svc.init(
 			'https://podium--fullercopy.my.salesforce.com',
@@ -100,7 +75,7 @@ body  {
 				buttonId: '5733I0000008OUy',
 				baseLiveAgentURL: 'https://d.la1-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'Product_Support_Chat_Team',
-				isOfflineSupportEnabled: false
+				isOfflineSupportEnabled: true
 			}
 		);
 	};
@@ -108,7 +83,7 @@ body  {
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
 		s.setAttribute('src', 'https://podium--fullercopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-		s.onload = function() {
+		s.onload = function () {
 			initESW(null);
 		};
 		document.body.appendChild(s);
@@ -116,6 +91,308 @@ body  {
 		initESW('https://service.force.com');
 	}
 </script>
+<style type='text/css'>
+	:root {
+		--color-blue-lightest: #E6ECFB;
+		--color-blue-lighter: #AABEF1;
+		--color-blue-light: #7797E8;
+		--color-blue-base: #4C76E0;
+		--color-blue-dark: #2859D4;
+		--color-blue-darker: #1F48B0;
+		--color-blue-darkest: #1A3C92;
+		--color-silver-base: #E0E6EE;
+		--color-silver-light: #F1F5FB;
+		--color-silver-lighter: #FAFBFD;
+		--color-grey-base: #555C67;
+		--color-green-base: #48C78C;
+		--boxshadow-xs: 0px 1px 1px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.16);
+		--boxshadow-sm: 0px 2px 4px -2px rgba(18, 21, 26, 0.08), 0px 2px 2px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.08);
+		--boxshadow-lg: 0px 16px 32px -4px rgba(18, 21, 26, 0.04), 0px 8px 16px -2px rgba(18, 21, 26, 0.04), 0px 4px 8px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.08);
+		--boxshadow-input: 0px 0px 0px 4px rgba(170, 190, 241, 1), 0px 0px 0px 1px rgba(255, 255, 255, 1);
+		--boxshadow-button: 0px 0px 0px 4px rgba(170, 190, 241, 1), 0px 0px 0px 1px rgba(255, 255, 255, 1);
+	}
 
-</body>
+	.embeddedServiceSidebar {
+		font-family: "Graphik", sans-serif;
+		font-size: 14px !important;
+	}
+
+	.embeddedServiceSidebarMinimizedDefaultUI,
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background: var(--color-blue-darkest);
+		border: none;
+		box-shadow: var(--boxshadow-lg);
+		text-decoration: none !important;
+	}
+
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		min-width: 12em;
+		max-width: 14em;
+		width: 192px;
+	}
+
+	.embeddedServiceSidebarMinimizedDefaultUI .minimizedImage,
+	.embeddedServiceSidebarMinimizedDefaultUI .minimizedImage,
+	.embeddedServiceHelpButton .embeddedServiceIcon {
+		display: none !important;
+		text-decoration: none !important;
+	}
+
+	.embeddedServiceSidebar input[type='text'] {
+		border: 1px solid var(--color-silver-base);
+		border-radius: 8px;
+		height: 40px;
+	}
+
+	.embeddedServiceSidebar button {
+		text-decoration: none !important;
+	}
+
+	.embeddedServiceSidebar button.embeddedServiceSidebarMinimizedDefaultUI:hover {
+		background: var(--color-blue-dark);
+	}
+
+	.embeddedServiceSidebar button.uiButton:hover {
+		box-shadow: none !important;
+	}
+
+	.embeddedServiceSidebar .form-element__label {
+		font-weight: 600;
+		letter-spacing: .8;
+	}
+
+	.embeddedServiceLiveAgentStateChat .messageArea:focus {
+		border: none;
+	}
+
+	.embeddedServiceHelpButton .uiButton .helpButtonLabel:before,
+	.embeddedServiceSidebarMinimizedDefaultUI.helpButton .messageContent:before,
+	.embeddedServiceSidebarMinimizedDefaultUI .messageContent:before {
+		content: '';
+		background-image: url("data:image/svg+xml,%3Csvg width='20' height='21' viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 19.7895C15.1895 19.7895 19.3947 15.5842 19.3947 10.3947C19.3947 5.20526 15.1895 1 10 1C4.81053 1 0.605263 5.20526 0.605263 10.3947C0.605263 12.9895 1.65789 15.3368 3.35789 17.0368L0.605263 19.7895H10V19.7895Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M5.48948 11.5211C6.11152 11.5211 6.61579 11.0168 6.61579 10.3947C6.61579 9.77269 6.11152 9.26842 5.48948 9.26842C4.86743 9.26842 4.36316 9.77269 4.36316 10.3947C4.36316 11.0168 4.86743 11.5211 5.48948 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M10 11.5211C10.622 11.5211 11.1263 11.0168 11.1263 10.3947C11.1263 9.77269 10.622 9.26842 10 9.26842C9.37795 9.26842 8.87368 9.77269 8.87368 10.3947C8.87368 11.0168 9.37795 11.5211 10 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M14.5105 11.5211C15.1326 11.5211 15.6368 11.0168 15.6368 10.3947C15.6368 9.77269 15.1326 9.26842 14.5105 9.26842C13.8885 9.26842 13.3842 9.77269 13.3842 10.3947C13.3842 11.0168 13.8885 11.5211 14.5105 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		height: 20px !important;
+		width: 20px !important;
+		background-size: cover;
+		background-repeat: no-repeat;
+		left: 5px;
+	}
+
+	.newMessage.embeddedServiceSidebarMinimizedDefaultUI .messageContent:after {
+		content: '';
+		width: 8px;
+		height: 8px;
+		background: var(--color-green-base);
+		border-radius: 100%;
+		position: absolute;
+		left: 18px;
+		top: 8px;
+	}
+
+	.embeddedServiceSidebar button {
+		transition: all .25s ease-in-out !important;
+	}
+
+	.embeddedServiceSidebar.layout-docked .dockableContainer {
+		margin: 1rem;
+		right: 0;
+		border-radius: 8px;
+	}
+
+	.dockableContainer {
+		box-shadow: var(--boxshadow-lg);
+	}
+
+	.uiButton--inverse {
+		background: var(--color-silver-light) !important;
+		color: var(--color-grey-base) !important;
+	}
+
+	.embeddedServiceSidebar .button,
+	.uiButton {
+		all: unset;
+		cursor: pointer;
+		outline: none;
+		background-color: #4c76e0;
+		color: #fff;
+		border: none;
+		border-radius: 8px;
+		padding: 0.5rem;
+		font-size: 14px;
+		max-width: 250px;
+		min-width: 200px;
+		margin: 0 auto;
+		text-decoration: none !important;
+	}
+
+	.uiButton:hover,
+	.uiButton:focus,
+	.embeddedServiceSidebar .button:focus,
+	.embeddedServiceSidebar .button:hover {
+		box-shadow: var(--boxshadow-button) !important;
+
+	}
+
+	.embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.chasitor.plaintextContent {
+		background: var(--color-blue-dark);
+		color: #fff;
+	}
+
+	.embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.agent.plaintextContent {
+		background: var(--color-blue-lightest);
+	}
+
+	.embeddedServiceLiveAgentStateChat .chasitorInputWrapper {
+		background: #fff;
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .chasitorText,
+	.embeddedServiceSidebarFormField input {
+		border: 1px solid var(--color-silver-base);
+		border-radius: 8px;
+		transition: all .25s ease-in-out !important;
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .chasitorText.textAreaIsFocused,
+	.embeddedServiceSidebarFormField input:focus {
+		border-color: var(--color-blue-base) !important;
+		box-shadow: var(--boxshadow-input) !important;
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border {
+		border-radius: 100%;
+		background: var(--color-blue-base);
+		height: 25px;
+		width: 25px;
+		left: 8px;
+		transition: all .25s ease-in-out !important;
+		box-shadow: var(--boxshadow-sm);
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border:hover {
+		background: var(--color-blue-dark);
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button__icon {
+		width: 10px;
+		height: 10px;
+		fill: #fff;
+	}
+
+	.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border:hover svg {
+		fill: #fff !important;
+	}
+
+	.unseenMessageNotification[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] .unseenMessageBubble[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] {
+		top: 13px;
+		height: 20px;
+		width: 20px;
+		background: var(--color-green-base);
+	}
+
+	.embeddedServiceLiveAgentStateChatItem.chatMessage {
+		padding: 0;
+	}
+
+	.embeddedServiceSidebar .avatar {
+		display: none;
+	}
+
+	.embeddedServiceLiveAgentStateChat .endChatContainer .endChatButton {
+		height: auto;
+		width: auto;
+		line-height: normal;
+		margin: auto;
+	}
+
+	.embeddedServiceSidebar ::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	.embeddedServiceSidebar ::-webkit-scrollbar-track {
+		border-radius: 10px;
+	}
+
+	.embeddedServiceSidebar ::-webkit-scrollbar-thumb {
+		background: var(--color-silver-base);
+		border-radius: 10px;
+	}
+
+	.embeddedServiceLiveAgentStateChat .endChatContainer {
+		width: auto;
+		padding: 10px;
+	}
+
+	.embeddedServiceLiveAgentStateChatItem .nameAndTimeContent,
+	.embeddedServiceLiveAgentStateChat .chatSessionStartTime {
+		color: var(--color-grey-base);
+		font-size: 10px;
+	}
+
+	.embeddedServiceSidebarDialogState .dialogButtonContainer {
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.embeddedServiceSidebarDialogState .dialogButton {
+		margin: 0;
+	}
+
+	.nameAndTimeContent {
+		position: relative;
+	}
+
+	.agent .nameAndTimeContent:before {
+		content: '';
+		bottom: 0;
+		left: 8px;
+		background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23E6ECFB'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		height: 25px;
+		width: 25px;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.chatMessage.chasitor {
+		padding-right: 40px;
+	}
+
+	.chasitor .nameAndTimeContent:after {
+		content: '';
+		bottom: 0;
+		right: -32px;
+		background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23AABEF1'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		height: 25px;
+		width: 25px;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.dialogTextContainer h3 {
+		font-size: 1.428em !important
+	}
+
+	.embeddedServiceLiveAgentStateWaiting .waitingGreeting {
+		font-size: 1.714em !important;
+		font-weight: 600;
+	}
+
+	.embeddedServiceLiveAgentStateWaiting .embeddedServiceLiveAgentQueuePosition,
+	.embeddedServiceLiveAgentStateWaiting .queuePositionMessage {
+		margin: 0;
+	}
+
+	.embeddedServiceLiveAgentQueuePosition.queuePositionWaiting .youAreNextMessage {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 400;
+	}
+
+	.inputEmail,
+	.embeddedServiceIcon {
+		display: none;
+	}
+</style>
 </html>
