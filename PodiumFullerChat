@@ -28,10 +28,6 @@
 			{
 				"label": "Email",
 				"transcriptFields": ["Email__c"],
-			},
-			{
-				"label": "Product",
-				"transcriptFields": ["Product__c"]
 			}
 		];
 
