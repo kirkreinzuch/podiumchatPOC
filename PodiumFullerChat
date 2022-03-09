@@ -1,14 +1,6 @@
 <htmL>
 <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript: String entityName"
 	value="String transcriptFieldName" />
-	
-// NEW <input type="hidden" name="liveagent.prechat:caseOrigin" value="Customer Chat" />
-// NEW <input type="hidden" 
-// NEW        name="liveagent.prechat.findorcreate.map:Case"   
-// NEW        value="Origin,caseOrigin;" />
-// NEW <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Case" value="true" />
-
-
 
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
