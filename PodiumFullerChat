@@ -1,14 +1,47 @@
-<htmL>
+<html>
 	<input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript: String entityName"
 		value="String transcriptFieldName" />
 		
 	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 	<script type='text/javascript'>
+		// populate pre-defined values here
+		var firstName = "Kirk";
+		var lastName =  "Kirk";
+		var email = "kirk.reinzuch@veltig.com";
+		//
+
+		var chatElemLoaded = false;
+
+		// assigns the email when the email input is rendered
+		var observer = new MutationObserver((m) => {
+			m[0].addedNodes.forEach((node) => {
+				// form element
+				if (node.classList?.contains('embeddedServiceSidebar')) {
+					chatElemLoaded = true;
+				}
+
+				// offline script is loaded
+				if (chatElemLoaded && node?.type === 'text/javascript') {
+					const emailField = document.querySelector('#SuppliedEmail');
+		
+					// update email field
+					if (emailField) {
+						emailField.value = email;
+						emailField.dispatchEvent(new Event('change'));
+						offlineChatStarted = true;
+					}
+				}
+			}) 
+		  });
+
+		  observer.observe(document.body, {childList: true});
+
+
 		var initESW = function (gslbBaseURL) {
 			embedded_svc.settings.displayHelpButton = true; //Or false
 			embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 			embedded_svc.settings.defaultMinimizedText = 'Contact Us';
-			embedded_svc.settings.prepopulatedPrechatFields = { "FirstName": "Kirk", "LastName": "Reinzuch", "Email": "kirk.reinzuch@veltig.com" }; 
+			embedded_svc.settings.prepopulatedPrechatFields = { FirstName: firstName, LastName: lastName, Email: email}; 
 			embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 			embedded_svc.settings.entryFeature = 'LiveAgent';
 			embedded_svc.settings.extraPrechatFormDetails = [
@@ -426,9 +459,9 @@
 			font-weight: 400;
 		}
 	
-		.inputEmail,
-		.embeddedServiceIcon {
+		.inputEmail {
 			display: none;
 		}
 	</style>
 </html>
+	
