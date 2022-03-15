@@ -358,14 +358,42 @@
 			width: 20px;
 			background: var(--color-green-base);
 		}
+
+
+		.isLightningOutContext.embeddedServiceLiveAgentStateChatAvatar {
+			background-color: var(--color-blue-darkest);
+			position: relative;
+			height: 25px;
+			width: 25px;
+			display: grid;
+			place-content: center;
+			border-radius: 50%;
+			position: absolute;
+			bottom: 0;
+			left: 8px;
+		}
+
+		.isLightningOutContext.embeddedServiceLiveAgentStateChatAvatar:empty {
+			display: none;
+		}
+
 	
 		.embeddedServiceLiveAgentStateChatItem.chatMessage {
 			padding: 0;
 		}
-	
-		.embeddedServiceSidebar .avatar {
-			display: none;
+
+		.embeddedServiceLiveAgentStateChatItem .isLightningOutContext .avatar {
+			width: 12px;
+			height: 12px;
+			top: 0;
+			padding: 0 !important;
+			margin: 0 !important;
+			background-size: contain;
+			background-repeat: no-repeat;
+			border-radius: 0;
+			position: relative;
 		}
+
 	
 		.embeddedServiceLiveAgentStateChat .endChatContainer .endChatButton {
 			height: auto;
@@ -411,17 +439,6 @@
 			position: relative;
 		}
 	
-		.agent .nameAndTimeContent:before {
-			content: '';
-			bottom: 0;
-			left: 8px;
-			background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23E6ECFB'/%3E%3C/svg%3E%0A");
-			position: absolute;
-			height: 25px;
-			width: 25px;
-			background-size: cover;
-			background-repeat: no-repeat;
-		}
 	
 		.chatMessage.chasitor {
 			padding-right: 40px;
@@ -463,5 +480,18 @@
 			display: none;
 		}
 	</style>
+
+	<!-- .agent .nameAndTimeContent:before {
+		content: '';
+		bottom: 0;
+		left: 8px;
+		background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23E6ECFB'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		height: 25px;
+		width: 25px;
+		background-size: cover;
+		background-repeat: no-repeat;
+	} -->
+
 </html>
 	
