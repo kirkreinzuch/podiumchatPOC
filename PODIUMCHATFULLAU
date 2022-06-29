@@ -1,1 +1,498 @@
+<html>
+	<input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript: String entityName"
+		value="String transcriptFieldName" />
+		
+	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+	<script type='text/javascript'>
+		// populate pre-defined values here
+		var firstName = "Kirk";
+		var lastName =  "Kirk";
+		var email = "kirk.reinzuch@veltig.com";
+		//
+
+		var chatElemLoaded = false;
+
+		// assigns the email when the email input is rendered
+		var observer = new MutationObserver((m) => {
+			m[0].addedNodes.forEach((node) => {
+				// form element
+				if (node.classList?.contains('embeddedServiceSidebar')) {
+					chatElemLoaded = true;
+				}
+
+				// offline script is loaded
+				if (chatElemLoaded && node?.type === 'text/javascript') {
+					const emailField = document.querySelector('#SuppliedEmail');
+		
+					// update email field
+					if (emailField) {
+						emailField.value = email;
+						emailField.dispatchEvent(new Event('change'));
+						offlineChatStarted = true;
+					}
+				}
+			}) 
+		  });
+
+		  observer.observe(document.body, {childList: true});
+
+
+		var initESW = function (gslbBaseURL) {
+			embedded_svc.settings.displayHelpButton = true; //Or false
+			embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+			embedded_svc.settings.defaultMinimizedText = 'Contact Us';
+			embedded_svc.settings.prepopulatedPrechatFields = { FirstName: firstName, LastName: lastName, Email: email}; 
+			embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+			embedded_svc.settings.entryFeature = 'LiveAgent';
+			embedded_svc.settings.extraPrechatFormDetails = [
+				{
+					"label": "Email",
+					"transcriptFields": ["Email__c"],
+				}
+			];
+	
+			embedded_svc.settings.extraPrechatInfo = [{
+				"entityName": "Contact",
+				"showOnCreate": true,
+				"linkToEntityName": "Case",
+				"linkToEntityField": "ContactId",
+				"saveToTranscript": "ContactId",
+				"entityFieldMaps": [{
+					"isExactMatch": true,
+					"fieldName": "FirstName",
+					"doCreate": true,
+					"doFind": false,
+					"label": "First Name"
+				}, {
+					"isExactMatch": true,
+					"fieldName": "LastName",
+					"doCreate": true,
+					"doFind": false,
+					"label": "Last Name"
+				}, {
+					"isExactMatch": true,
+					"fieldName": "Email",
+					"doCreate": true,
+					"doFind": true,
+					"label": "Email"
+				}]
+			}
+			];
+	
+				embedded_svc.init(
+				'https://podium--fullcopy.my.salesforce.com',
+				'https://fullcopy-podiumcompany.cs223.force.com/internal',
+				gslbBaseURL,
+				'00D8K0000004aap',
+				'Product_Support_Chat_Team',
+				{
+					baseLiveAgentContentURL: 'https://c.la4-c1cs-ia4.salesforceliveagent.com/content',
+					deploymentId: '5728K000000GmaE',
+					buttonId: '5738K000000Gmad',
+					baseLiveAgentURL: 'https://d.la4-c1cs-ia4.salesforceliveagent.com/chat',
+					eswLiveAgentDevName: 'Product_Support_Chat_Team',
+					isOfflineSupportEnabled: true
+				}
+			);
+		};
+
+		if (!window.embedded_svc) {
+			var s = document.createElement('script');
+			s.setAttribute('src', 'https://podium--fullcopy.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+			s.onload = function() {
+				initESW(null);
+			};
+			document.body.appendChild(s);
+		} else {
+			initESW('https://service.force.com');
+		}
+	</script>
+	<style type='text/css'>
+		:root {
+			--color-blue-lightest: #E6ECFB;
+			--color-blue-lighter: #AABEF1;
+			--color-blue-light: #7797E8;
+			--color-blue-base: #4C76E0;
+			--color-blue-dark: #2859D4;
+			--color-blue-darker: #1F48B0;
+			--color-blue-darkest: #1A3C92;
+			--color-silver-base: #E0E6EE;
+			--color-silver-light: #F1F5FB;
+			--color-silver-lighter: #FAFBFD;
+			--color-grey-base: #555C67;
+			--color-green-base: #48C78C;
+			--boxshadow-xs: 0px 1px 1px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.16);
+			--boxshadow-sm: 0px 2px 4px -2px rgba(18, 21, 26, 0.08), 0px 2px 2px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.08);
+			--boxshadow-lg: 0px 16px 32px -4px rgba(18, 21, 26, 0.04), 0px 8px 16px -2px rgba(18, 21, 26, 0.04), 0px 4px 8px 0px rgba(18, 21, 26, 0.04), 0px 0px 0px 0.5px rgba(18, 21, 26, 0.08);
+			--boxshadow-input: 0px 0px 0px 4px rgba(170, 190, 241, 1), 0px 0px 0px 1px rgba(255, 255, 255, 1);
+			--boxshadow-button: 0px 0px 0px 4px rgba(170, 190, 241, 1), 0px 0px 0px 1px rgba(255, 255, 255, 1);
+		}
+	
+		.embeddedServiceSidebar {
+			font-family: "Graphik", sans-serif;
+			font-size: 14px !important;
+		}
+	
+		.embeddedServiceSidebarMinimizedDefaultUI,
+		.embeddedServiceHelpButton .helpButton .uiButton {
+			background: var(--color-blue-darkest);
+			border: none;
+			box-shadow: var(--boxshadow-lg);
+			text-decoration: none !important;
+		}
+	
+		.embeddedServiceHelpButton .helpButton .uiButton {
+			min-width: 12em;
+			max-width: 14em;
+			width: 192px;
+		}
+	
+		.embeddedServiceSidebarMinimizedDefaultUI .minimizedImage,
+		.embeddedServiceSidebarMinimizedDefaultUI .minimizedImage,
+		.embeddedServiceHelpButton .embeddedServiceIcon {
+			display: none !important;
+			text-decoration: none !important;
+		}
+	
+		.embeddedServiceSidebar input[type='text'] {
+			border: 1px solid var(--color-silver-base);
+			border-radius: 8px;
+			height: 40px;
+		}
+	
+		.embeddedServiceSidebar button {
+			text-decoration: none !important;
+		}
+	
+		.embeddedServiceSidebar button.embeddedServiceSidebarMinimizedDefaultUI:hover {
+			background: var(--color-blue-dark);
+		}
+	
+	
+	
+		.embeddedServiceSidebar .form-element__label {
+			font-weight: 600;
+			letter-spacing: .8;
+		}
+	
+		.embeddedServiceLiveAgentStateChat .messageArea:focus {
+			border: none;
+		}
+	
+		.embeddedServiceHelpButton .uiButton .helpButtonLabel:before,
+		.embeddedServiceSidebarMinimizedDefaultUI.helpButton .messageContent:before,
+		.embeddedServiceSidebarMinimizedDefaultUI .messageContent:before {
+			content: '';
+			background-image: url("data:image/svg+xml,%3Csvg width='20' height='21' viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 19.7895C15.1895 19.7895 19.3947 15.5842 19.3947 10.3947C19.3947 5.20526 15.1895 1 10 1C4.81053 1 0.605263 5.20526 0.605263 10.3947C0.605263 12.9895 1.65789 15.3368 3.35789 17.0368L0.605263 19.7895H10V19.7895Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M5.48948 11.5211C6.11152 11.5211 6.61579 11.0168 6.61579 10.3947C6.61579 9.77269 6.11152 9.26842 5.48948 9.26842C4.86743 9.26842 4.36316 9.77269 4.36316 10.3947C4.36316 11.0168 4.86743 11.5211 5.48948 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M10 11.5211C10.622 11.5211 11.1263 11.0168 11.1263 10.3947C11.1263 9.77269 10.622 9.26842 10 9.26842C9.37795 9.26842 8.87368 9.77269 8.87368 10.3947C8.87368 11.0168 9.37795 11.5211 10 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3Cpath d='M14.5105 11.5211C15.1326 11.5211 15.6368 11.0168 15.6368 10.3947C15.6368 9.77269 15.1326 9.26842 14.5105 9.26842C13.8885 9.26842 13.3842 9.77269 13.3842 10.3947C13.3842 11.0168 13.8885 11.5211 14.5105 11.5211Z' stroke='white' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+			position: absolute;
+			height: 20px !important;
+			width: 20px !important;
+			background-size: cover;
+			background-repeat: no-repeat;
+			left: 5px;
+		}
+	
+		.newMessage.embeddedServiceSidebarMinimizedDefaultUI .messageContent:after {
+			content: '';
+			width: 8px;
+			height: 8px;
+			background: var(--color-green-base);
+			border-radius: 100%;
+			position: absolute;
+			left: 18px;
+			top: 8px;
+		}
+	
+		.embeddedServiceSidebar button {
+			transition: all .25s ease-in-out !important;
+		}
+	
+		.embeddedServiceSidebar.layout-docked .dockableContainer {
+			margin: 1rem;
+			right: 0;
+			border-radius: 8px;
+		}
+	
+		.dockableContainer {
+			box-shadow: var(--boxshadow-lg);
+		}
+	
+		.uiButton--inverse {
+			background: var(--color-silver-light) !important;
+			color: var(--color-grey-base) !important;
+		}
+	
+		.embeddedServiceSidebar .button,
+		.uiButton {
+			all: unset;
+			cursor: pointer;
+			outline: none;
+			background-color: #4c76e0;
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 0.5rem;
+			font-size: 14px;
+			max-width: 250px;
+			min-width: 200px;
+			margin: 0 auto;
+			text-decoration: none !important;
+		}
+
+		.embeddedServiceLiveAgentStateChatInputFooter .fileUploadControls {
+			background-color: transparent;
+		}
+
+		.embeddedServiceSidebar .uiButton.paperClipButton, .embeddedServiceSidebar .uiButton.Remove, .embeddedServiceSidebar .uiButton.Upload {
+			background-color: var(--color-blue-light) !important;
+			position: relative;
+		}
+
+		.embeddedServiceSidebar .uiButton.Upload.paperClipButton:before {
+			content: '';
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='52px' height='52px' viewBox='0 0 52 52' enable-background='new 0 0 52 52' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='%23FFFFFF' d='M48.5,31h-3c-0.8,0-1.5,0.8-1.5,1.5v10c0,0.8-0.7,1.5-1.5,1.5h-33C8.7,44,8,43.3,8,42.5v-10 C8,31.8,7.3,31,6.5,31h-3C2.7,31,2,31.8,2,32.5V46c0,2.2,1.8,4,4,4h40c2.2,0,4-1.8,4-4V32.5C50,31.8,49.3,31,48.5,31z'/%3E%3Cpath fill='%23FFFFFF' d='M27,2.4c-0.6-0.6-1.5-0.6-2.1,0L11.4,15.9c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l5.6-5.6 c0.6-0.6,1.8-0.2,1.8,0.7v21.2c0,0.8,0.6,1.5,1.4,1.5h3c0.8,0,1.6-0.8,1.6-1.5V15.3c0-0.9,1-1.3,1.7-0.7l5.6,5.6 c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1c0.6-0.6,0.6-1.5,0-2.1L27,2.4z'/%3E%3C/g%3E%3C/svg%3E");
+			position: absolute;
+			height: 18px;
+			width: 18px;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.embeddedServiceSidebar .uiButton.Remove:before {
+			content: '';
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='52px' height='52px' viewBox='0 0 52 52' enable-background='new 0 0 52 52' xml:space='preserve'%3E%3Cpath fill='%23FFFFFF' d='M30.3,12.6c10.4,0,18.9,8.4,18.9,18.9s-8.5,18.9-18.9,18.9h-8.2c-0.8,0-1.3-0.6-1.3-1.4v-3.2 c0-0.8,0.6-1.5,1.4-1.5h8.1c7.1,0,12.8-5.7,12.8-12.8s-5.7-12.8-12.8-12.8H16.4c0,0-0.8,0-1.1,0.1c-0.8,0.4-0.6,1,0.1,1.7l4.9,4.9 c0.6,0.6,0.5,1.5-0.1,2.1L18,29.7c-0.6,0.6-1.3,0.6-1.9,0.1l-13-13c-0.5-0.5-0.5-1.3,0-1.8L16,2.1c0.6-0.6,1.6-0.6,2.1,0l2.1,2.1 c0.6,0.6,0.6,1.6,0,2.1l-4.9,4.9c-0.6,0.6-0.6,1.3,0.4,1.3c0.3,0,0.7,0,0.7,0L30.3,12.6z'/%3E%3C/svg%3E");
+			position: absolute;
+			height: 18px;
+			width: 18px;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.embeddedServiceSidebar .uiButton.Upload:before {
+			content: '';
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='52px' height='52px' viewBox='0 0 52 52' enable-background='new 0 0 52 52' xml:space='preserve'%3E%3Cpath fill='%23FFFFFF' d='M2.1,44.5l4.4-16.3h18.6c0.5,0,1-0.5,1-1v-2c0-0.5-0.5-1-1-1H6.5l-4.3-16l0,0C2.1,8,2,7.7,2,7.4 C2,6.7,2.7,6,3.5,6.1c0.2,0,0.3,0.1,0.5,0.1l0,0l0,0l0,0l45,18.5c0.6,0.2,1,0.8,1,1.4s-0.4,1.1-0.9,1.3l0,0L4,46.4l0,0 c-0.2,0.1-0.4,0.1-0.6,0.1C2.6,46.4,2,45.8,2,45C2,44.8,2,44.7,2.1,44.5L2.1,44.5z'/%3E%3C/svg%3E");
+			position: absolute;
+			height: 18px;
+			width: 18px;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.embeddedServiceSidebar .uiButton.paperClipButton, .embeddedServiceSidebar .uiButton.Remove, .embeddedServiceSidebar .uiButton.Upload  {
+			max-width: 25px;
+			min-width: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.embeddedServiceLiveAgentStateChatInputFooter .fileInfo {
+			background: #fff;
+			padding: 0.5rem;
+		}
+	
+		.uiButton:hover,
+		.uiButton:focus,
+		.embeddedServiceSidebar .button:focus,
+		.embeddedServiceSidebar .button:hover {
+			box-shadow: var(--boxshadow-button) !important;
+	
+		}
+	
+		.embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.chasitor.plaintextContent {
+			background: var(--color-blue-dark);
+			color: #fff;
+		}
+	
+		.embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.agent.plaintextContent {
+			background: var(--color-blue-lightest);
+		}
+	
+		.embeddedServiceLiveAgentStateChat .chasitorInputWrapper {
+			background: #fff;
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .chasitorText,
+		.embeddedServiceSidebarFormField input {
+			border: 1px solid var(--color-silver-base);
+			border-radius: 8px;
+			transition: all .25s ease-in-out !important;
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .chasitorText.textAreaIsFocused,
+		.embeddedServiceSidebarFormField input:focus {
+			border-color: var(--color-blue-base) !important;
+			box-shadow: var(--boxshadow-input) !important;
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border {
+			border-radius: 100%;
+			background: var(--color-blue-base);
+			height: 25px;
+			width: 25px;
+			left: 8px;
+			transition: all .25s ease-in-out !important;
+			box-shadow: var(--boxshadow-sm);
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border:hover {
+			background: var(--color-blue-dark);
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button__icon {
+			width: 10px;
+			height: 10px;
+			fill: #fff;
+		}
+	
+		.embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .scrollDownButton .slds-button_icon-border:hover svg {
+			fill: #fff !important;
+		}
+	
+		.unseenMessageNotification[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] .unseenMessageBubble[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] {
+			top: 13px;
+			height: 20px;
+			width: 20px;
+			background: var(--color-green-base);
+		}
+
+
+		.isLightningOutContext.embeddedServiceLiveAgentStateChatAvatar {
+			background-color: var(--color-blue-darkest);
+			position: relative;
+			height: 25px;
+			width: 25px;
+			display: grid;
+			place-content: center;
+			border-radius: 50%;
+			position: absolute;
+			bottom: 0;
+			left: 8px;
+		}
+
+		.isLightningOutContext.embeddedServiceLiveAgentStateChatAvatar:empty {
+			display: none;
+		}
+
+	
+		.embeddedServiceLiveAgentStateChatItem.chatMessage {
+			padding: 0;
+		}
+
+		.embeddedServiceLiveAgentStateChatItem .isLightningOutContext .avatar {
+			width: 12px;
+			height: 12px;
+			top: 0;
+			padding: 0 !important;
+			margin: 0 !important;
+			background-size: contain;
+			background-repeat: no-repeat;
+			border-radius: 0;
+			position: relative;
+		}
+
+	
+		.embeddedServiceLiveAgentStateChat .endChatContainer .endChatButton {
+			height: auto;
+			width: auto;
+			line-height: normal;
+			margin: auto;
+		}
+	
+		.embeddedServiceSidebar ::-webkit-scrollbar {
+			width: 5px;
+		}
+	
+		.embeddedServiceSidebar ::-webkit-scrollbar-track {
+			border-radius: 10px;
+		}
+	
+		.embeddedServiceSidebar ::-webkit-scrollbar-thumb {
+			background: var(--color-silver-base);
+			border-radius: 10px;
+		}
+	
+		.embeddedServiceLiveAgentStateChat .endChatContainer {
+			width: auto;
+			padding: 10px;
+		}
+	
+		.embeddedServiceLiveAgentStateChatItem .nameAndTimeContent,
+		.embeddedServiceLiveAgentStateChat .chatSessionStartTime {
+			color: var(--color-grey-base);
+			font-size: 10px;
+		}
+	
+		.embeddedServiceSidebarDialogState .dialogButtonContainer {
+			display: grid;
+			gap: 0.65rem;
+		}
+	
+		.embeddedServiceSidebarDialogState .dialogButton {
+			margin: 0;
+		}
+	
+		.nameAndTimeContent {
+			position: relative;
+		}
+	
+	
+		.chatMessage.chasitor {
+			padding-right: 40px;
+		}
+	
+		.chasitor .nameAndTimeContent:after {
+			content: '';
+			bottom: 0;
+			right: -32px;
+			background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23AABEF1'/%3E%3C/svg%3E%0A");
+			position: absolute;
+			height: 25px;
+			width: 25px;
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+	
+		.dialogTextContainer h3 {
+			font-size: 1.428em !important
+		}
+	
+		.embeddedServiceLiveAgentStateWaiting .waitingGreeting {
+			font-size: 1.714em !important;
+			font-weight: 600;
+		}
+	
+		.embeddedServiceLiveAgentStateWaiting .embeddedServiceLiveAgentQueuePosition,
+		.embeddedServiceLiveAgentStateWaiting .queuePositionMessage {
+			margin: 0;
+		}
+	
+		.embeddedServiceLiveAgentQueuePosition.queuePositionWaiting .youAreNextMessage {
+			margin: 0;
+			font-size: 1rem;
+			font-weight: 400;
+		}
+	
+		.inputEmail {
+			display: none;
+		}
+	</style>
+
+	<!-- .agent .nameAndTimeContent:before {
+		content: '';
+		bottom: 0;
+		left: 8px;
+		background-image: url("data:image/svg+xml,%3Csvg width='27' height='27' viewBox='0 0 27 27' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.385 0C5.99321 0 0 5.99321 0 13.385C0 20.7768 5.99321 26.77 13.385 26.77C20.7768 26.77 26.77 20.7768 26.77 13.385C26.77 5.99321 20.7768 0 13.385 0ZM13.385 4.00184C15.8298 4.00184 17.813 5.98501 17.813 8.42982C17.813 10.8746 15.8298 12.8578 13.385 12.8578C10.9402 12.8578 8.95703 10.8746 8.95703 8.42982C8.95703 5.98501 10.9402 4.00184 13.385 4.00184ZM13.3823 23.2708C10.9429 23.2708 8.70845 22.383 6.98479 20.9134C6.56412 20.5555 6.32373 20.0311 6.32373 19.4793C6.32373 16.999 8.33149 15.0158 10.8118 15.0158H15.9637C18.444 15.0158 20.4436 16.999 20.4436 19.4793C20.4436 20.0311 20.2032 20.5555 19.7825 20.9134C18.0561 22.3803 15.8216 23.2708 13.3823 23.2708Z' fill='%23E6ECFB'/%3E%3C/svg%3E%0A");
+		position: absolute;
+		height: 25px;
+		width: 25px;
+		background-size: cover;
+		background-repeat: no-repeat;
+	} -->
+
+</html>
+	
 
