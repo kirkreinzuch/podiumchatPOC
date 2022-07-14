@@ -5,9 +5,9 @@
 	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 	<script type='text/javascript'>
 		// populate pre-defined values here
-		var firstName = "Kirk";
-		var lastName =  "Kirk";
-		var email = "kirk.reinzuch@veltig.com";
+		var firstName = "DREW";
+		var lastName =  "TEST";
+		var email = "drew.reilly@podium.com";
 		//
 
 		var chatElemLoaded = false;
